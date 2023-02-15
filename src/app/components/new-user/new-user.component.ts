@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user.interface';
+import { LocalaccessService } from 'src/app/services/localaccess.service';
 import { UserServiceService } from 'src/app/services/user-service.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-new-user',
@@ -13,7 +15,8 @@ export class NewUserComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserServiceService
+    private userService: UserServiceService,
+    private localAccess: LocalaccessService
   ) {}
 
   formulario = this.formBuilder.group({
@@ -23,7 +26,6 @@ export class NewUserComponent {
   });
 
   saveUser() {
-    console.log(this.formulario.controls.name.value);
     const { name, email, phone } = this.formulario.controls;
 
     let user: User = {
@@ -33,5 +35,17 @@ export class NewUserComponent {
       phone: phone.value as string,
     };
     this.userService.User.push(user);
+    const users = this.userService.User;
+    this.localAccess.saveUserData(users);
+
+    if (users) {
+      Swal.fire('¡Éxito!', 'Usuario Creado', 'success');
+
+      this.deleteAll();
+    }
+  }
+
+  deleteAll() {
+    this.formulario.reset();
   }
 }

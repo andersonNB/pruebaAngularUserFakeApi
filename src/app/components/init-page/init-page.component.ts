@@ -72,6 +72,7 @@ export class InitPageComponent {
 
   userUpdate(value: any) {
     this.users = value;
+    this.userService.User = value;
   }
 
   userCreation() {
