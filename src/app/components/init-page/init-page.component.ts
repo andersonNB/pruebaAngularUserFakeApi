@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.interface';
+import { LocalaccessService } from 'src/app/services/localaccess.service';
 import { UserServiceService } from 'src/app/services/user-service.service';
 
 @Component({
@@ -17,7 +18,8 @@ export class InitPageComponent {
 
   constructor(
     private userService: UserServiceService,
-    private router: Router
+    private router: Router,
+    private localAccess: LocalaccessService
   ) {}
   ngOnInit(): void {
     this.getUsers();
@@ -25,9 +27,10 @@ export class InitPageComponent {
 
   getUsers(): void {
     const userSrc = this.userService.User;
+    const userLocal = this.localAccess.getUserData();
 
-    if (userSrc) {
-      this.users = userSrc;
+    if (userSrc?.length > 0 || userLocal?.length > 0) {
+      this.users = userSrc ? userSrc : userLocal;
     } else {
       this.userService.getUsers().subscribe((user) => {
         this.users = user;
@@ -83,9 +86,5 @@ export class InitPageComponent {
     this.isUserExist = false;
     this.user = this.users;
     this.messageNotFound = '';
-  }
-
-  prueba(): void {
-    console.log('info');
   }
 }

@@ -8,12 +8,16 @@ export class LocalaccessService {
   constructor() {}
 
   saveUserData(user: User[]): void {
+    if (!user) {
+      return;
+    }
+
     localStorage.setItem('user', JSON.stringify(user));
   }
 
-  getUserData(): User[] | any {
+  getUserData(): User[] {
     if (!localStorage.getItem('user')) {
-      return;
+      return [];
     }
 
     const user = JSON.parse(localStorage.getItem('user')!);
