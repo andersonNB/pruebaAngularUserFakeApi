@@ -16,7 +16,7 @@
     >
       <th scope="row">{{ user.name }}</th>
       <td>{{ user.email }}</td>
-      <td>{{ user.address.street }}</td>
+      <td>{{ user.address?.street }}</td>
       <td>{{ user.phone }}</td>
       <td>
         <button class="btn btn-alert" (click)="deleteUserById(i)">

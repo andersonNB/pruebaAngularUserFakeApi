@@ -10,6 +10,15 @@ export class UserServiceService {
   constructor(private http: HttpClient) {}
 
   public api_users = 'https://jsonplaceholder.typicode.com/users';
+  private user!: User[];
+
+  get User(): User[] {
+    return this.user;
+  }
+
+  set User(user: User[]) {
+    this.user = user;
+  }
 
   getUsers(id?: number): Observable<User[]> {
     let params = id ? `${this.api_users}/${id}` : this.api_users;

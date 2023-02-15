@@ -1,0 +1,24 @@
+<div class="centerHome mt-2">
+  <input type="text" placeholder="buscar usuario" #inputSearch />
+  <button
+    (click)="searchUser(inputSearch.value)"
+    class="btn btn-primary p-2 m-1"
+  >
+    Buscar
+  </button>
+  <button (click)="reset()" class="btn btn-warning p-2 m-1">Reset</button>
+  <button (click)="userCreation()" class="btn btn-success p-2 m-1">
+    Crear Usuario
+  </button>
+</div>
+<app-table-user
+  *ngIf="!isUserExist && users && !user; else withoutUser"
+  [users]="users"
+  (userUpdate)="userUpdate($event)"
+></app-table-user>
+
+<ng-template #withoutUser class="ngTempWithoutUser">
+  <app-table-user *ngIf="user" [users]="user"></app-table-user>
+</ng-template>
+
+<h3>{{ messageNotFound }}</h3>

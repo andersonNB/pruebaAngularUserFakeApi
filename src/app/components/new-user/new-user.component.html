@@ -1,1 +1,43 @@
-<p>new-user works!</p>
+<div class="container">
+  <form role="form" [formGroup]="formulario" (ngSubmit)="saveUser()">
+    <div class="form-group">
+      <label for="name">Nombre:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        placeholder="Enter name"
+        formControlName="name"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        placeholder="Enter email"
+        formControlName="email"
+      />
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="phone"
+        placeholder="Enter phone"
+        formControlName="phone"
+      />
+    </div>
+    <button
+      type="submit"
+      class="btn btn-success"
+      [disabled]="formulario?.invalid"
+    >
+      Add
+    </button>
+    <a class="btn btn-primary ml-2" routerLink="/">Home</a>
+  </form>
+</div>
