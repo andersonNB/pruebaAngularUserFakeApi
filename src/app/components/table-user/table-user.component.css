@@ -1,0 +1,16 @@
+.tableUsers {
+  margin: 10px auto;
+  text-align: center;
+  border: 1px solid rgb(212, 100, 100);
+}
+
+button {
+  margin-bottom: 10px;
+  background-color: red;
+  color: white;
+  cursor: pointer;
+}
+
+.bodyTable {
+  cursor: pointer;
+}
